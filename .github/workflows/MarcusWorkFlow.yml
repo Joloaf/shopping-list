@@ -23,23 +23,13 @@ jobs:
           dotnet-version: ${{matrix.version}}
 
       - name: Build project
-        if: success()
         run: dotnet build
       
       - name: Build Test
         if: success()
         run: dotnet test
 
-
-  check-trigger:
-    runs-on: ubuntu-latest
-    outputs:
-      trigger: ${{ github.event_name }}
-    steps:
-      - name: Determine trigger
+      - name: Send message
         run: |
-          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
-            echo "Triggered by: Manual workflow dispatch"
-          elif [[ "${{ github.event_name }}" == "pull_request" ]]; then
-            echo "Triggered by: Pull request"
-          fi
+          echo "${{ github.event_name }}
+
