@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: ${{ matrix.os }}
     outputs:
-      "output_${{ matrix.os }}": ${{ steps.gen_build_outputs.outputs[format('output_{0}', matrix.os)] }}
+      test_result: ${{ steps.gen_build_outputs.outputs.test_result }}
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
