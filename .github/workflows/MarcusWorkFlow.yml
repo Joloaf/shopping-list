@@ -31,8 +31,10 @@ jobs:
         id: gen_build_outputs
         if: success() 
         run: |
-          version=$( dotnet test )
-          echo "output_${{ matrix.os }}=${version}" >> "$GITHUB_OUTPUT"
+          version=$(dotnet test 2>&1)
+          # Remove newlines and extra spaces
+          version=$(echo "$version" | tr '\n' ' ' | xargs)
+          echo "test_result=$version" >> "$GITHUB_OUTPUT"
 
   
   post-build:
