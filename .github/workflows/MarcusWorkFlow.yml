@@ -32,7 +32,7 @@ jobs:
         if: success() 
         run: |
           version=$( dotnet test )
-          echo "output_${ matrix.os }=${version}" >> "$GITHUB_OUTPUT"
+          echo "output_${{ matrix.os }}=${version}" >> "$GITHUB_OUTPUT"
 
   
   post-build:
@@ -40,6 +40,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Post build summary
-        run: echo '${{ toJSON(needs.job1.outputs) }}'
+        run: echo '${{ toJSON(needs.build.outputs) }}'
 
 
