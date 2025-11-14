@@ -10,6 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       trigger: ${{ github.event_name }}
+    steps:
+      - name: Determine trigger
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "Triggered by: Manual workflow dispatch"
+          elif [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            echo "Triggered by: Pull request"
+          fi
 
   build:
     runs-on: ${{ matrix.os }}
@@ -17,37 +25,27 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest]
         version: [9.0, 8.0]
-
-  steps:
-    - name: Checkout code
-      uses: actions/checkout@v5   
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5   
         
-    - name: setup NET
-      uses: actions/setup-dotnet@v5.0.0
-      with:
-        dotnet-version: ${{matrix.version}}
+      - name: setup NET
+        uses: actions/setup-dotnet@v5.0.0
+        with:
+          dotnet-version: ${{matrix.version}}
 
-    - name: Build project
-      if: success()
-      run: dotnet build
-    
-    - name: Build Test
-      if: success()
-      run: dotnet test
+      - name: Build project
+        if: success()
+        run: dotnet build
+      
+      - name: Build Test
+        if: success()
+        run: dotnet test
 
-    - name: Determine trigger
-      run: |
-        if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
-          echo "Triggered by: Manual workflow dispatch"
-        elif [[ "${{ github.event_name }}" == "pull_request" ]]; then
-          echo "Triggered by: Pull request"
-        fi
-
-
-
-
-          
-
-
-  
-  
+      - name: Determine trigger
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "Triggered by: Manual workflow dispatch"
+          elif [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            echo "Triggered by: Pull request"
+          fi
