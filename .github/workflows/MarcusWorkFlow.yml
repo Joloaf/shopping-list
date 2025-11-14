@@ -10,8 +10,7 @@ jobs:
   build:
     runs-on: ${{ matrix.os }}
     outputs:
-      output_ubuntu-latest: ${{ steps.gen_build_outputs.outputs.output_ubuntu-latest }}
-      output_windows-latest: ${{ steps.gen_build_outputs.outputs.windows-latest }}
+      "output_${{ matrix.os }}": ${{ steps.gen_build_outputs.outputs[format('output_{0}', matrix.os)] }}
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
@@ -33,7 +32,7 @@ jobs:
         if: success() 
         run: |
           version=$( dotnet test )
-          echo "output_${version}=${version}" >> "$GITHUB_OUTPUT"
+          echo "output_${ matrix.os }=${version}" >> "$GITHUB_OUTPUT"
 
   
   post-build:
