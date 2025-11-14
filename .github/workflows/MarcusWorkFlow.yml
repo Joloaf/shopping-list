@@ -31,5 +31,5 @@ jobs:
 
       - name: Send message
         run: |
-          echo "${{ github.event_name }}
+          echo "${{ github.event_name }}"
 
