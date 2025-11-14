@@ -37,4 +37,6 @@ jobs:
       - name: Post build summary
         run: |
           echo "${{ github.event_name }}"
+          echo "${{ github.event }}"
+          echo "${{ github. }}"
 
