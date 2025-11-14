@@ -31,10 +31,23 @@ jobs:
         run: dotnet build
 
       - name: Test project
+        if: success()
         run: dotnet test
 
-      - name: Print matrix values
+      - name: Print on Push
+        if: ${{ on.pull_request }} then
         run: |
+          echo "Push it real good!"
+      
+      - name: Print on Pull Request
+        if: ${{ on.pull_request }} then
+        run: |
+          echo "Some text"
+
+      - name: Print on Workflow Dispatch
+        if: ${{ on.workflow_dispatch }} then
+        run: |
+          echo "This is being displayed when running the workflow manually..."
           echo "🔧 Running on OS: ${{ matrix.os }}"
           echo "🖥️ Using .NET version: ${{ matrix.version }}"
           echo "📦 Repository: ${{ github.repository }}"
