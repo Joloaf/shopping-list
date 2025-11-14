@@ -29,10 +29,10 @@ jobs:
       
       - name: Build Test
         id: gen_build_outputs
-        if: success() 
+        if: success()
+        shell: bash
         run: |
           version=$(dotnet test 2>&1)
-          # Remove newlines and extra spaces
           version=$(echo "$version" | tr '\n' ' ' | xargs)
           echo "test_result=$version" >> "$GITHUB_OUTPUT"
 
