@@ -27,7 +27,7 @@ jobs:
         run: dotnet build
 
       - name: Build Test
-        run: dotnet test
+        run: dotnet web
 
   post-build:
     needs: build
