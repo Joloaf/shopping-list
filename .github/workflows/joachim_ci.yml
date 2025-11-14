@@ -35,17 +35,17 @@ jobs:
         run: dotnet test
 
       - name: Print on Push
-        if: ${{ github.event.push }}
+        if: ${{ github.push_event == 'push' }}
         run: |
           echo "Push it real good!"
       
       - name: Print on Pull Request
-        if: ${{ github.event.pull_request }}
+        if: ${{ github.pull_event == 'pull_request' }}
         run: |
           echo "Some text"
 
       - name: Print on Workflow Dispatch
-        if: ${{ github.event_name == 'pull_request' }}
+        if: ${{ github.dispatch_event == 'workflow_dispatch' }}
         run: |
           echo "This is being displayed when running the workflow manually..."
           echo "🔧 Running on OS: ${{ matrix.os }}"
