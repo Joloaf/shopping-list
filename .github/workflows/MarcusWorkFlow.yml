@@ -29,7 +29,12 @@ jobs:
         if: success()
         run: dotnet test
 
-      - name: Send message
+  
+  post-build:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post build summary
         run: |
           echo "${{ github.event_name }}"
 
