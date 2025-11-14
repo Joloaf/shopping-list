@@ -7,6 +7,19 @@ on:
   workflow_dispatch:
 
 jobs:
+  check-trigger:
+    runs-on: ubuntu-latest
+    outputs:
+      trigger: ${{ github.event_name }}
+    steps:
+      - name: Determine trigger
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "Triggered by: Manual workflow dispatch"
+          elif [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            echo "Triggered by: Pull request"
+          fi
+
   build:
     runs-on: ${{ matrix.os }}
     strategy:
