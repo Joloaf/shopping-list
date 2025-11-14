@@ -42,7 +42,7 @@ jobs:
       - name: Print on Pull Request
         if: ${{ github.event_name == 'pull_request' }}
         run: |
-          echo "Some text"
+          echo "Pull Request number: ${{ pull_request_number }}"
 
       - name: Print on Workflow Dispatch
         if: ${{ github.event_name == 'workflow_dispatch' }}
