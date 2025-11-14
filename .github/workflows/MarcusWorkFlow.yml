@@ -24,7 +24,7 @@ jobs:
           dotnet-version: ${{matrix.version}}
 
       - name: Build Solution
-        run: dotnet build ShoppingList.sln
+        run: dotnet build
 
   post-build:
     needs: build
