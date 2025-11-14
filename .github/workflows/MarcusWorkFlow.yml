@@ -32,7 +32,7 @@ jobs:
         run: dotnet test
 
       - name: Data extract
-        if: on.workflow_dispatch()
+        if: workflow_dispatch()
         run: echo "Test"
 
 
