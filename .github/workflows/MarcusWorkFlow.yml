@@ -6,10 +6,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  check-trigger:
-    runs-on: ubuntu-latest
-    outputs:
-      trigger: ${{ github.event_name }}
 
   build:
     runs-on: ${{ matrix.os }}
@@ -34,6 +30,12 @@ jobs:
         if: success()
         run: dotnet test
 
+
+  check-trigger:
+    runs-on: ubuntu-latest
+    outputs:
+      trigger: ${{ github.event_name }}
+    steps:
       - name: Determine trigger
         run: |
           if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
