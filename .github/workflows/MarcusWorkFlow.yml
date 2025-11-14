@@ -24,10 +24,19 @@ jobs:
           dotnet-version: ${{matrix.version}}
 
       - name: Build project
+        if: success()
         run: dotnet build
 
       - name: Build Test
+        if: success()
         run: dotnet test
+
+      - name: Data extract
+        if: on.workflow_dispatch()
+        run: echo "Test"
+
+
+          
 
 
   
