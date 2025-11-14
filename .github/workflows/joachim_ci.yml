@@ -31,7 +31,7 @@ jobs:
         run: dotnet build
 
       - name: Test project
-        if: success()
+        #if: success()
         run: dotnet test
 
       - name: Print on Push
