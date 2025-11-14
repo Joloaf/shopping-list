@@ -41,8 +41,8 @@ jobs:
         run: |
           echo "🥷 Author: ${{ github.actor }}"
           echo "Commit Message: ${{ github.event.head_commit.message }}"
-          echo "Files changed: ${{git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | xargs }}"
-      
+          echo "Files changed: $(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | xargs)"
+
       - name: Print on Pull Request
         if: ${{ github.event_name == 'pull_request' }}
         run: |
@@ -50,7 +50,7 @@ jobs:
           echo "Pull Request number: ${{ github.event.pull_request.number }}"
           echo "Pull Request target source: ${{ github.event.pull_request.head.ref }}"
           echo "Pull Request target target: ${{ github.event.pull_request.base.ref }}"
-          echo "Files changed: ${{ git diff --name-only -r HEAD^1 HEAD | xargs }}"
+          echo "Files changed: $(git diff --name-only HEAD^1 HEAD | xargs)"
 
       - name: Print on Workflow Dispatch
         if: ${{ github.event_name == 'workflow_dispatch' }}
